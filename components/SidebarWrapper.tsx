@@ -1,57 +1,83 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Sidebar from "./Sidebar";
-import { motion } from "framer-motion";
 
 export default function SidebarWrapper({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  // Detect desktop vs mobile
+  useEffect(() => {
+    const handleResize = () => {
+      const desktop = window.innerWidth >= 768;
+      setIsDesktop(desktop);
+      setSidebarOpen(desktop); // open by default only on desktop
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
-    <div className="flex min-h-screen w-full bg-black text-white relative overflow-hidden">
+    <div className="relative min-h-screen bg-black text-white flex">
       {/* Sidebar */}
-      <Sidebar open={sidebarOpen} />
+      <AnimatePresence initial={false}>
+        {sidebarOpen && (
+          <motion.div
+  initial={{ x: -300 }}
+  animate={{
+    x:
+      sidebarOpen ||
+      (typeof window !== "undefined" && window.innerWidth >= 768)
+        ? 0
+        : -300,
+  }}
+  transition={{ type: "spring", stiffness: 220, damping: 26 }}
+ className="fixed inset-y-0 left-0 w-72 bg-black border-r border-black z-40 md:relative md:h-screen"
 
-      {/* Main content area */}
-      <motion.div
-        animate={{ x: sidebarOpen ? 288 : 0 }}
-        transition={{ type: "spring", stiffness: 200, damping: 30 }}
-        className="flex-1 flex flex-col min-h-screen"
+>
+            <Sidebar open={true} onClose={() => setSidebarOpen(false)} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Backdrop for mobile */}
+      <AnimatePresence>
+        {!isDesktop && sidebarOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.5 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSidebarOpen(false)}
+            className="fixed inset-0 bg-black z-30"
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Main content */}
+      <main
+        className={`flex-1 p-6 transition-all duration-300 ${
+          isDesktop && sidebarOpen ? "ml-72" : "ml-0"
+        }`}
       >
         {children}
-      </motion.div>
+      </main>
 
-      {/* Floating Hamburger */}
-      <motion.button
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-        whileTap={{ scale: 0.9 }}
-        className="fixed top-5 left-5 z-50 flex flex-col justify-center items-center 
-                   w-12 h-12 rounded-full bg-gray-900/70 backdrop-blur-md
-                   border border-pink-500/30 hover:border-pink-400
-                   transition-colors shadow-lg"
-      >
-        {/* Hamburger/X icon */}
-        <motion.span
-          animate={{
-            rotate: sidebarOpen ? 45 : 0,
-            y: sidebarOpen ? 6 : 0,
-          }}
-          className="block w-6 h-0.5 bg-white rounded-sm"
-        />
-        <motion.span
-          animate={{
-            opacity: sidebarOpen ? 0 : 1,
-          }}
-          transition={{ duration: 0.2 }}
-          className="block w-6 h-0.5 bg-white rounded-sm my-1"
-        />
-        <motion.span
-          animate={{
-            rotate: sidebarOpen ? -45 : 0,
-            y: sidebarOpen ? -6 : 0,
-          }}
-          className="block w-6 h-0.5 bg-white rounded-sm"
-        />
-      </motion.button>
+      {/* Hamburger (mobile + desktop when closed) */}
+      {!sidebarOpen && (
+        <motion.button
+          onClick={() => setSidebarOpen(true)}
+          whileTap={{ scale: 0.9 }}
+          className="fixed top-4 left-4 z-50 flex flex-col justify-center items-center 
+                     w-10 h-10 rounded-md bg-neutral-900/90 border border-neutral-700
+                     hover:bg-neutral-800 transition"
+        >
+          <span className="block w-6 h-0.5 bg-white rounded-sm" />
+          <span className="block w-6 h-0.5 bg-white rounded-sm my-1" />
+          <span className="block w-6 h-0.5 bg-white rounded-sm" />
+        </motion.button>
+      )}
     </div>
   );
 }

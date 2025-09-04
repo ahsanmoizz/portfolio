@@ -12,30 +12,21 @@ export default function ProjectCard({
   link: string;
   description: string;
 }) {
-  function handleClick() {
-   
-    // open project link
-    window.open(link, "_blank");
-  }
-
   return (
     <motion.div
-      whileHover={{ scale: 1.05, rotate: 1 }}
-      whileTap={{ scale: 0.97 }}
-      transition={{ type: "spring", stiffness: 200, damping: 15 }}
-      onClick={handleClick}
-      className="rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 overflow-hidden cursor-pointer shadow-lg hover:shadow-pink-500/50 border border-gray-700/50"
+      whileHover={{ scale: 1.03 }}
+      transition={{ type: "spring", stiffness: 200, damping: 20 }}
+      onClick={() => window.open(link, "_blank")}
+      className="cursor-pointer rounded-lg overflow-hidden border border-gray-800 bg-gray-900 hover:border-pink-500 transition"
     >
       <img
         src={img}
         alt={title}
-        className="w-full h-48 object-cover transform hover:scale-105 transition-transform duration-500"
+        className="w-full h-48 object-cover"
       />
-      <div className="p-5">
-        <h3 className="text-xl font-bold text-pink-400 drop-shadow-[0_0_10px_#ff16d1]">
-          {title}
-        </h3>
-        <p className="mt-2 text-sm text-gray-300">{description}</p>
+      <div className="p-4">
+        <h3 className="text-lg font-bold text-gray-100">{title}</h3>
+        <p className="mt-2 text-sm text-gray-400">{description}</p>
       </div>
     </motion.div>
   );

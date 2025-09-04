@@ -1,116 +1,91 @@
 import Image from "next/image";
-import ResumeButton from "../../components/ResumeButton";
 
 export default function ResumePage() {
   return (
-    <section className="min-h-screen px-6 py-12 max-w-5xl mx-auto space-y-12">
-      {/* Header with Photo + Name */}
-      <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-        <div className="relative w-40 h-40 rounded-full overflow-hidden shadow-lg">
-          {/* Place your image in /public/images/profile.jpg */}
-          <Image
-            src="/images/profile.jpg"
-            alt="Profile Picture"
-            fill
-            className="object-cover"
-          />
+    <section className="px-6 py-16 max-w-5xl mx-auto space-y-12">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row items-center gap-8">
+        <div className="relative w-32 h-32 rounded-full overflow-hidden border border-gray-700">
+          <Image src="/images/profile.jpg" alt="Profile" fill className="object-cover" />
         </div>
-        <div className="space-y-2 text-center md:text-left">
-          <h1 className="text-4xl font-extrabold text-pink-500">
-            Ahsan Moizz
-          </h1>
-          <p className="text-gray-300">
+        <div className="text-center md:text-left">
+          <h1 className="text-3xl font-bold text-gray-100">Ahsan Moizz</h1>
+          <p className="text-gray-400 text-sm">
             Lahore, Pakistan · +92 302 1502223 · jonsonhig@gmail.com
           </p>
-          <ResumeButton />
         </div>
       </div>
 
       {/* Summary */}
-      <section>
-        <h2 className="text-2xl font-bold text-pink-400 mb-2">Summary</h2>
-        <p className="text-gray-200 leading-relaxed">
-          Blockchain and Full-Stack Developer with 3+ years of experience,
-          including 1+ year building production-grade blockchain applications.
-          Specialized in smart contracts, DeFi/NFT platforms, Layer 2 scaling,
-          ZK proofs, bridges, and on/off-ramp systems. Skilled across frontend,
-          backend, databases, and cloud infrastructure, with 20+ projects
-          delivered. Strong ability to design and scale products from idea to
-          production.
+      <div>
+        <h2 className="text-2xl font-bold text-pink-500 mb-2">Summary</h2>
+        <p className="text-gray-300 leading-relaxed">
+          Blockchain and Full-Stack Developer with 3+ years experience. 
+          Specialized in smart contracts, DeFi, NFT platforms, zk proofs, and cross-chain bridges.  
+          Strong full-stack skills across frontend, backend, databases, and cloud.
         </p>
-      </section>
+      </div>
 
       {/* Work Experience */}
-      <section>
-        <h2 className="text-2xl font-bold text-pink-400 mb-4">Work Experience</h2>
-        <div className="space-y-6">
+      <div>
+        <h2 className="text-2xl font-bold text-pink-500 mb-4">Experience</h2>
+        <div className="space-y-6 border-l border-gray-700 pl-6">
           <div>
-            <h3 className="font-semibold text-lg text-white">
+            <h3 className="font-semibold text-gray-100">
               Senior Blockchain Developer — Daily Blockchain Network
             </h3>
-            <p className="text-sm text-gray-400">Toronto, Canada · Apr 2025 – Present</p>
-            <ul className="list-disc list-inside text-gray-200 mt-2 space-y-1">
-              <li>Architect of Daily Blockchain — Quantum + AI + Blockchain protocol</li>
-              <li>Delivered DeFi, DAO, NFT, cross-chain bridge infrastructure</li>
-              <li>Designed secure multi-sig, zk-optimized scaling solutions</li>
+            <p className="text-sm text-gray-400">Toronto · Apr 2025 – Present</p>
+            <ul className="list-disc list-inside text-gray-300 mt-2 space-y-1">
+              <li>Architect of Daily Blockchain protocol</li>
+              <li>Delivered DeFi, DAO, NFT, and cross-chain infrastructure</li>
+              <li>Designed zk-optimized scaling solutions</li>
             </ul>
           </div>
 
           <div>
-            <h3 className="font-semibold text-lg text-white">
+            <h3 className="font-semibold text-gray-100">
               Lead Full-Stack & Blockchain Engineer — A.T.I.G.I.N.G
             </h3>
-            <p className="text-sm text-gray-400">Goa, India · Feb 2025 – Present</p>
-            <ul className="list-disc list-inside text-gray-200 mt-2 space-y-1">
-              <li>Led ChatPay: hybrid real-time chat + blockchain payments</li>
-              <li>Built scalable socket-based messaging + encrypted delivery</li>
-              <li>Deployed cloud-native infra on AWS with Docker/Kubernetes</li>
+            <p className="text-sm text-gray-400">Goa · Feb 2025 – Present</p>
+            <ul className="list-disc list-inside text-gray-300 mt-2 space-y-1">
+              <li>Led ChatPay: real-time chat + blockchain payments</li>
+              <li>Built scalable encrypted messaging infrastructure</li>
+              <li>Deployed AWS infra with Docker & Kubernetes</li>
             </ul>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Skills */}
-      <section>
-        <h2 className="text-2xl font-bold text-pink-400 mb-4">Key Skills</h2>
-        <div className="grid md:grid-cols-2 gap-6 text-gray-200">
+      <div>
+        <h2 className="text-2xl font-bold text-pink-500 mb-4">Key Skills</h2>
+        <div className="grid sm:grid-cols-2 gap-6 text-gray-300">
           <div>
-            <h3 className="font-semibold text-white">Blockchain</h3>
-            <p>
-              Solidity, Rust, Hardhat, Truffle, Ethers.js, zk-SNARKs,
-              Rollups, Cross-Chain Bridges, Wallet Integration, DAO Protocols
-            </p>
+            <h3 className="font-semibold text-gray-100">Blockchain</h3>
+            <p>Solidity, Rust, zk-SNARKs, Rollups, Bridges, Wallets</p>
           </div>
           <div>
-            <h3 className="font-semibold text-white">Full-Stack</h3>
-            <p>
-              React, Next.js, React Native, NestJS, Node.js, Express, Python,
-              Django, FastAPI, PostgreSQL, MongoDB
-            </p>
+            <h3 className="font-semibold text-gray-100">Full-Stack</h3>
+            <p>React, Next.js, Node.js, Python, PostgreSQL, MongoDB</p>
           </div>
           <div>
-            <h3 className="font-semibold text-white">Cloud & DevOps</h3>
-            <p>
-              AWS (EC2, S3, Lambda, RDS), Docker, Kubernetes, CI/CD,
-              Vercel, Cloudflare
-            </p>
+            <h3 className="font-semibold text-gray-100">Cloud & DevOps</h3>
+            <p>AWS, Docker, Kubernetes, CI/CD, Vercel</p>
           </div>
           <div>
-            <h3 className="font-semibold text-white">Languages</h3>
-            <p>
-              JavaScript, TypeScript, React ,Python, Solidity, Rust, SQL, C++
-            </p>
+            <h3 className="font-semibold text-gray-100">Languages</h3>
+            <p>TypeScript, Python, Solidity, Rust, SQL, C++</p>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Education */}
-      <section>
-        <h2 className="text-2xl font-bold text-pink-400 mb-2">Education</h2>
-        <p className="text-gray-200">
-          Intermediate in Computer Science — Punjab College, Khanewal (2023 – 2025)
+      <div>
+        <h2 className="text-2xl font-bold text-pink-500 mb-2">Education</h2>
+        <p className="text-gray-300">
+          Intermediate in Computer Science — Punjab College, Khanewal (2023–2025)
         </p>
-      </section>
+      </div>
     </section>
   );
 }

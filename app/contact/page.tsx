@@ -8,7 +8,7 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.currentTarget; // this is the form
+    const form = e.currentTarget;
     const data = new FormData(form);
 
     setLoading(true);
@@ -22,54 +22,52 @@ export default function ContactPage() {
     setLoading(false);
 
     if (res.ok) {
-      setStatus("Message sent!");
-      form.reset(); // ✅ safe now
+      setStatus("✅ Message sent!");
+      form.reset();
     } else {
-      setStatus("Something went wrong. Try again.");
+      setStatus("❌ Something went wrong. Try again.");
     }
   };
 
   return (
-    <section className="h-screen flex items-center justify-center">
+    <section className="min-h-screen flex items-center justify-center px-6">
       <form
         onSubmit={handleSubmit}
-        className="space-y-4 bg-gray-900 p-8 rounded-xl shadow-xl w-96"
+        className="space-y-4 bg-gray-900 p-8 rounded-lg border border-gray-700 w-full max-w-md"
       >
+        <h2 className="text-2xl font-bold text-pink-500 mb-4">Get in Touch</h2>
+
         <input
           name="name"
           placeholder="Your Name"
-          className="w-full p-2 rounded text-black"
+          className="w-full p-3 rounded-md bg-gray-800 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-500"
           required
         />
         <input
           name="email"
           type="email"
           placeholder="Email"
-          className="w-full p-2 rounded text-black"
+          className="w-full p-3 rounded-md bg-gray-800 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-500"
           required
         />
         <textarea
           name="message"
           placeholder="Message"
-          className="w-full p-2 rounded text-black"
+          className="w-full p-3 rounded-md bg-gray-800 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-500"
           rows={4}
           required
         />
+
         <button
           type="submit"
-          className="bg-pink-600 text-white px-6 py-2 rounded flex items-center justify-center gap-2 hover:scale-105 transition"
+          className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-md bg-pink-600 hover:bg-pink-500 transition text-white font-semibold"
           disabled={loading}
         >
-          {loading ? (
-            <>
-              Sending...
-              <FaPaperPlane className="animate-pulse" />
-            </>
-          ) : (
-            "Send"
-          )}
+          {loading ? "Sending..." : "Send"}
+          <FaPaperPlane className={loading ? "animate-pulse" : ""} />
         </button>
-        {status && <p className="text-green-400">{status}</p>}
+
+        {status && <p className="text-sm text-gray-300">{status}</p>}
       </form>
     </section>
   );
